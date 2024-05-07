@@ -14,7 +14,7 @@ To run this project locally, follow these steps:
 
 Clone the repository:
 
-    git clone https://github.com/WinnieTheBloue/TB_AI-tests/tree/main
+    git clone https://github.com/WinnieTheBloue/TB_AI-tests
 
 Install the dependencies:
 
