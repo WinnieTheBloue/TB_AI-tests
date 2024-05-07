@@ -14,7 +14,7 @@ To run this project locally, follow these steps:
 
 Clone the repository:
 
-    git clone https://github.com/your-username/emergency-plan-ai.git
+    git clone https://github.com/WinnieTheBloue/TB_AI-tests/tree/main
 
 Install the dependencies:
 
