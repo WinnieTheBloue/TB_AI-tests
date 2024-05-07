@@ -1,4 +1,4 @@
-# Emergency Plan AI Integration
+# Emergency plan AI integration 🤖
 
 This project explores the integration of artificial intelligence (AI) models in creating emergency plans for various risks. The project specifically compares the performance of OpenAI and Mistral AI models in generating emergency plans based on given risk parameters.
 
