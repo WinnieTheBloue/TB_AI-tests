@@ -5,6 +5,15 @@ const openai = new OpenAI({
     dangerouslyAllowBrowser: true,
 });
 
+/**
+ * Sends a message to OpenAI and returns the response.
+ *
+ * @param {Array<Object>} message - An array of message objects. Each object should have 'role' and 'content' properties.
+ * @param {string} message.role - The role of the message sender (either 'system' or 'user').
+ * @param {string} message.content - The content of the message.
+ * @returns {Promise<Object>} A promise that resolves to the parsed JSON response from OpenAI.
+ * @throws {Error} Throws an error if there's a problem with the OpenAI request.
+ */
 const askOpenAI = async (message) => {
     try {
         const completion = await openai.chat.completions.create({
@@ -18,6 +27,18 @@ const askOpenAI = async (message) => {
     }
 }
 
+/**
+ * Asks OpenAI to establish an emergency plan for a given risk.
+ *
+ * @param {Object} risk - The risk object containing 'description', 'probability', and 'impact'.
+ * @param {string} risk.description - The description of the risk.
+ * @param {number} risk.probability - The probability of the risk (between 0 and 4).
+ * @param {number} risk.impact - The impact of the risk (between 0 and 4).
+ * @param {Object} companyInfos - The company information object containing 'employees'.
+ * @param {number} companyInfos.employees - The number of employees in the company.
+ * @returns {Promise<Object>} A promise that resolves to an object containing 'informations' and 'taches'.
+ * @throws {Error} Throws an error if there's a problem with the OpenAI request.
+ */
 const askEmergencyPlan = async (risk, companyInfos) => {
     const message = [
         {

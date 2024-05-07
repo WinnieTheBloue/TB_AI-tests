@@ -2,6 +2,15 @@ import MistralClient from "@mistralai/mistralai";
 
 const mistral = new MistralClient(import.meta.env.VITE_MISTRAL_API_KEY);
 
+/**
+ * Sends a message to Mistral AI and returns the response.
+ *
+ * @param {Array<Object>} message - An array of message objects. Each object should have 'role' and 'content' properties.
+ * @param {string} message.role - The role of the message sender (either 'system' or 'user').
+ * @param {string} message.content - The content of the message.
+ * @returns {Promise<Object>} A promise that resolves to the parsed JSON response from Mistral AI.
+ * @throws {Error} Throws an error if there's a problem with the Mistral AI request.
+ */
 const askMistral = async (message) => {
     try {
         const completion = await mistral.chat({
@@ -17,6 +26,18 @@ const askMistral = async (message) => {
     }
 }
 
+/**
+ * Asks Mistral AI to establish an emergency plan for a given risk.
+ *
+ * @param {Object} risk - The risk object containing 'description', 'probability', and 'impact'.
+ * @param {string} risk.description - The description of the risk.
+ * @param {number} risk.probability - The probability of the risk (between 0 and 4).
+ * @param {number} risk.impact - The impact of the risk (between 0 and 4).
+ * @param {Object} companyInfos - The company information object containing 'employees'.
+ * @param {number} companyInfos.employees - The number of employees in the company.
+ * @returns {Promise<Object>} A promise that resolves to an object containing 'informations' and 'taches'.
+ * @throws {Error} Throws an error if there's a problem with the Mistral AI request.
+ */
 const askEmergencyPlan = async (risk, companyInfos) => {
     const message = [
         {

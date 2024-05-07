@@ -22,6 +22,13 @@ export default {
   },
 
   methods: {
+    /**
+     * Asks the specified AI for an emergency plan for the current risk.
+     *
+     * @param {string} ai - The AI to ask ('openAI' or 'mistral').
+     * @returns {Promise<void>}
+     * @throws {Error} Throws an error if there's a problem with the AI request.
+     */
     async askAI(ai) {
       this.isLoading = true;
       try {
@@ -92,7 +99,7 @@ export default {
     </div>
 
     <p v-if="error">{{ error }}</p>
-    <div v-if="!error && answer" class="flex justify-center gap-2 mt-2 ">
+    <div v-if="!error && answer" class="flex justify-center gap-2 mt-2">
       <div v-if="answer.informations" class="border-4 p-4 w-2/5">
         <h2 class="text-xl text-center mb-1">Informations</h2>
         <ul class="text-center">
