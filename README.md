@@ -7,22 +7,21 @@ To run this project locally, follow these steps:
 
 Clone the repository:
 
-```
-git clone https://github.com/your-username/emergency-plan-ai.git
-````
-    Install the dependencies:
+    git clone https://github.com/your-username/emergency-plan-ai.git
 
-npm install
+Install the dependencies:
 
-    Create a .env file by copying the .env.example file and adding your OpenAI and Mistral API keys:
+    npm install
 
-VITE_OPENAI_API_KEY=your_openai_api_key
-VITE_MISTRAL_API_KEY=your_mistral_api_key
+Create a .env file by copying the .env.example file and adding your OpenAI and Mistral API keys:
 
-    Run the project:
+    VITE_OPENAI_API_KEY=your_openai_api_key
+    VITE_MISTRAL_API_KEY=your_mistral_api_key
 
-npm run dev
+Run the project:
 
+    npm run dev
+    
 Usage
 
 The project provides a simple interface to input risk parameters and company information, and then generate an emergency plan using either OpenAI or Mistral AI. The generated emergency plan includes a list of information to gather and tasks to accomplish to overcome the risk.
