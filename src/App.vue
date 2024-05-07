@@ -1,6 +1,7 @@
 <script>
-import OpenAI from "openai";
+
 import MistralClient from "@mistralai/mistralai";
+import { askEmergencyPlan } from "./utils/openAI";
 import { ref } from "vue";
 
 export default {
@@ -29,47 +30,18 @@ export default {
     },
 
     methods: {
-        handleImageError() {
-            document
-                .getElementById("screenshot-container")
-                ?.classList.add("!hidden");
-            document.getElementById("docs-card")?.classList.add("!row-span-1");
-            document
-                .getElementById("docs-card-content")
-                ?.classList.add("!flex-row");
-            document.getElementById("background")?.classList.add("!hidden");
-        },
         async askOpenAI() {
             this.isLoading = true;
-            const openai = new OpenAI({
-                apiKey: this.openAI,
-                dangerouslyAllowBrowser: true,
-            });
-
             try {
-                const completion = await openai.chat.completions.create({
-                    response_format: { type: "json_object" },
-                    messages: [
-                        {
-                            role: "system",
-                            content: `Tu es spécialisé dans la gestion de risques pour une société. En cas de problèmes, tu peux compter sur ${this.companyInfos.employees} employés pour t'aider. Tu es paramétré pour répondre en JSON et en français.`,
-                        },
-                        {
-                            role: "user",
-                            content: `Établis le plan d'urgence pour ce risque : ${this.risk.description}. La probabilité est estimée à ${this.risk.probability}/4 et l'impact à ${this.risk.impact}/4. Le plan d'urgence doit contenir UNIQUEMENT les informations qu'il faut obtenir pour donner une image claire de la situation si ce risque s'avère et les tâches qu'il faut accomplir pour le surmonter format {informations : [{titre: "Information 1"},{titre : "Information 2"},{titre: "..."},],taches : [{titre: "Tâche 1"},{titre : "Tâche 2"},{titre: "..."},]}. Les tâches et les informations doivent être claires et utiles.`,
-                        },
-                    ],
-                    model: "gpt-3.5-turbo",
-                });
-                console.log(completion.choices[0].message.content);
-                this.openAiError = false;
-                this.openAiAnswer = JSON.parse(
-                    completion.choices[0].message.content
+                const response = await askEmergencyPlan(
+                    this.risk,
+                    this.companyInfos
                 );
+                this.openAiError = false;
+                this.openAiAnswer = response;
                 this.isLoading = false;
             } catch (error) {
-                console.error(error);
-                this.openAiError = true;
+                this.openAiError = error;
                 this.isLoading = false;
             }
         },
@@ -134,7 +106,7 @@ export default {
         >
             Ask OpenAI
         </button>
-        <p v-if="openAiError">Une erreure avec OpenAI est survenue</p>
+        <p v-if="openAiError">{{ openAiError }}</p>
         <div v-if="!openAiError && openAiAnswer">
             <div v-if="openAiAnswer.informations">
                 <p>Informations :</p>
