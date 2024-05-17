@@ -41,7 +41,7 @@ The project provides a simple interface to input risk parameters and company inf
 
 ## Future work 🚀
 
-While this project uses Vue.js for the frontend, the final project will use Laravel with Inertia and Vue.js for the frontend. This project serves as a proof-of-concept for AI integration and a comparison of AI models for emergency plan generation.
+While this project uses only Vue.js, the final project will use Laravel with Inertia and Vue.js for the frontend. This project serves as a proof-of-concept for AI integration and a comparison of AI models for emergency plans generation.
 
 ## License 📄
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/WinnieTheBloue/TB_AI-tests/blob/main/LICENSE) file for details.
