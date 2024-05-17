@@ -8,11 +8,12 @@ export default {
       isLoading: false,
       companyInfos: {
         employees: 20,
+        type: "Agence de marketing digital",
         country: "Suisse",
       },
       risk: {
-        name: "Incendie",
-        description: "Risque d'incendie",
+        description: "Vague de malades dans le personnel avec de la fièvre sur une période variant de 3 à 8 jours. La contamination se fait par les voies respiratoires et au contact direct de la peau.",
+        consequences: "Dans les prochains jours, le virus atteindra un pic d'intensité (3 jours) et l'ensemble des collaborateurs et leur famille pourraient être atteintes.",
         probability: 1,
         impact: 4,
       },
@@ -37,7 +38,6 @@ export default {
             this.risk,
             this.companyInfos
           );
-
           this.error = false;
           this.answer = response;
           this.isLoading = false;
@@ -46,7 +46,6 @@ export default {
             this.risk,
             this.companyInfos
           );
-
           this.error = false;
           this.answer = response;
           this.isLoading = false;
@@ -100,19 +99,19 @@ export default {
 
     <p v-if="error">{{ error }}</p>
     <div v-if="!error && answer" class="flex justify-center gap-2 mt-2">
-      <div v-if="answer.informations" class="border-4 p-4 w-2/5">
+      <div v-if="answer.infos" class="border-4 p-4 w-2/5">
         <h2 class="text-xl text-center mb-1">Informations</h2>
         <ul class="text-center">
-          <li v-for="information in answer.informations">
-            {{ information.titre }}
+          <li v-for="info in answer.infos">
+            {{ info.titre }}
           </li>
         </ul>
       </div>
-      <div v-if="answer.informations" class="border-4 p-4 w-2/5">
+      <div v-if="answer.tasks" class="border-4 p-4 w-2/5">
         <h2 class="text-xl text-center mb-1">Tâches</h2>
         <ul class="text-center">
-          <li v-for="tache in answer.taches">
-            {{ tache.titre }}
+          <li v-for="task in answer.tasks">
+            {{ task.titre }}
           </li>
         </ul>
       </div>
